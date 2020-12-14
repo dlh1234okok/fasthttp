@@ -12,7 +12,7 @@ import java.util.Map;
  */
 @Setter
 @Getter
-@ConfigurationProperties(prefix = "lrms.http")
+@ConfigurationProperties(prefix = "fast.http")
 public class LrmsHttpProperties {
 
     private Map<String, String> server;

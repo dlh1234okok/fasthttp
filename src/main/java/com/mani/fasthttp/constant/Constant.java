@@ -13,7 +13,7 @@ public class Constant {
             "|____/__|  |__|_|  /____  >____|___|  /__|  |__| |   __/ \n" +
             "                 \\/     \\/_____/    \\/           |__|    ";
 
-    public static final String CONFIG_PREFIX = "lrms.http";
+    public static final String CONFIG_PREFIX = "fast.http";
 
     public static final String DEFAULT_PACKAGE = ".remote";
 }
