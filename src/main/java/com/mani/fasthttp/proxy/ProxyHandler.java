@@ -43,7 +43,7 @@ public class ProxyHandler implements InvocationHandler {
             httpRequestHandler.initRequest(method.getParameters(), args);
             String result = httpRequestHandler.execute();
             if (StringUtils.isEmpty(result)) {
-                log.error("lrms_http,Result is Empty,Url:[{}]", httpRequestHandler.getUrl());
+                log.error("fasthttp,Result is Empty,Url:[{}]", httpRequestHandler.getUrl());
                 return null;
             }
             Class<?> returnType = method.getReturnType();
