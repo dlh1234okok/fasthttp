@@ -79,7 +79,7 @@ public class ReadAnnotationUtils {
             ClassMetadata classMetadata = metadataReader.getClassMetadata();
             //类全名
             String className = classMetadata.getClassName();
-            log.info("lrms_http package scan to Class：[{}]", className);
+            log.info("fasthttp package scan to Class：[{}]", className);
             try {
                 //加载类
                 /*ClassLoader classLoader = ClassLoader.getSystemClassLoader();
@@ -87,7 +87,7 @@ public class ReadAnnotationUtils {
                 Class<?> clazz = Class.forName(className);
                 paths.add(clazz);
             } catch (ClassNotFoundException e) {
-                log.error("lrms_http ClassLoad Error:[{}]，message:[{}]", className, e.getCause());
+                log.error("fasthttp ClassLoad Error:[{}]，message:[{}]", className, e.getCause());
             }
         }
         return paths;
