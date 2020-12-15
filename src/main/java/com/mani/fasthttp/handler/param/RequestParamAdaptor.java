@@ -2,8 +2,8 @@ package com.mani.fasthttp.handler.param;
 
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ReflectUtil;
-import com.skzz.lrms_http.annotations.Order;
-import com.skzz.lrms_http.annotations.PathVariable;
+import com.mani.fasthttp.annotations.Order;
+import com.mani.fasthttp.annotations.PathVariable;
 import org.springframework.util.StringUtils;
 
 import java.lang.annotation.Annotation;
