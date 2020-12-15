@@ -1,12 +1,15 @@
 package com.mani.fasthttp.handler.param;
 
-import com.mani.fasthttp.annotations.PathVariable;
+import cn.hutool.core.util.ClassUtil;
+import cn.hutool.core.util.ReflectUtil;
+import com.skzz.lrms_http.annotations.Order;
+import com.skzz.lrms_http.annotations.PathVariable;
 import org.springframework.util.StringUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Parameter;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Dulihong
@@ -43,7 +46,8 @@ public class RequestParamAdaptor {
                 }
             }
             if (!isRest) {
-                params.put(parameter.getName(), args[i]);
+                // params.put(parameter.getName(), args[i]);
+                Optional.ofNullable(handlerInvoke(parameter.getName(), args[i])).ifPresent(params::putAll);
             }
         }
         this.url = url;
@@ -57,5 +61,29 @@ public class RequestParamAdaptor {
 
     public Map<String, Object> getParams() {
         return params;
+    }
+
+
+    static List<Class<?>> getHandlerClasses(String name, Object value) {
+        Class<ParamTypeHandlerAdaptor> paramTypeHandlerAdaptorClass = ParamTypeHandlerAdaptor.class;
+        Set<Class<?>> classes = ClassUtil.scanPackageBySuper(paramTypeHandlerAdaptorClass.getPackage().getName(), paramTypeHandlerAdaptorClass);
+        return classes.stream().sorted(Comparator.comparing(s -> {
+            Order order = s.getAnnotation(Order.class);
+            return order.value();
+        })).collect(Collectors.toList());
+    }
+
+    static Map<String, Object> handlerInvoke(String name, Object value) {
+        List<Class<?>> handlerClasses = getHandlerClasses(name, value);
+        Map<String, Object> result = null;
+        for (Class<?> cls : handlerClasses) {
+            Class<ParamTypeHandlerAdaptor> clz = (Class<ParamTypeHandlerAdaptor>) cls;
+            ParamTypeHandlerAdaptor adaptor = ReflectUtil.newInstanceIfPossible(clz);
+            if (adaptor.supports(value)) {
+                result = adaptor.handle(name, value);
+                break;
+            }
+        }
+        return result;
     }
 }
