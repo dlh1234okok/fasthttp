@@ -13,10 +13,12 @@ import java.util.Map;
 @Setter
 @Getter
 @ConfigurationProperties(prefix = "fast.http")
-public class LrmsHttpProperties {
+public class FastHttpProperties {
 
     private Map<String, String> server;
 
     private String scanPackages;
+
+    private String authorization;
 
 }

@@ -22,7 +22,7 @@ public class RemoteServerHandler {
 
     public static void initServer(Map<String, String> servers) {
         if (null == servers) {
-            log.error("未配置远程调用服务：[lrms.http.server]");
+            log.error("未配置远程调用服务：[fast.http.server]");
             servers = new LinkedHashMap<>();
         }
         RemoteServerHandler.servers = servers;

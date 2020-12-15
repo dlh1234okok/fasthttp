@@ -1,7 +1,7 @@
 package com.mani.fasthttp;
 
 import com.mani.fasthttp.annotations.Service;
-import com.mani.fasthttp.config.LrmsHttpProperties;
+import com.mani.fasthttp.config.FastHttpProperties;
 import com.mani.fasthttp.constant.Constant;
 import com.mani.fasthttp.handler.ReadAnnotationUtils;
 import com.mani.fasthttp.handler.RemoteServerHandler;
@@ -49,19 +49,19 @@ public class HttpServiceRegistryBeanConfigure implements ApplicationContextAware
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry beanDefinitionRegistry) throws BeansException {
-        BindResult<LrmsHttpProperties> bindResult = Binder.get(environment).bind(Constant.CONFIG_PREFIX, LrmsHttpProperties.class);
-        LrmsHttpProperties lrmsHttpProperties = bindResult.orElseGet(() -> {
-            LrmsHttpProperties properties = new LrmsHttpProperties();
+        BindResult<FastHttpProperties> bindResult = Binder.get(environment).bind(Constant.CONFIG_PREFIX, FastHttpProperties.class);
+        FastHttpProperties fastHttpProperties = bindResult.orElseGet(() -> {
+            FastHttpProperties properties = new FastHttpProperties();
             String defaultScan = ReadAnnotationUtils.getPackageByAnnotation(ctx, SpringBootApplication.class) + Constant.DEFAULT_PACKAGE;
             properties.setScanPackages(defaultScan);
             log.info("设置默认扫描路径[{}]", defaultScan);
             return properties;
         });
-        RemoteServerHandler.initServer(lrmsHttpProperties.getServer());
-        RemoteServerHandler.initScanPackages(lrmsHttpProperties.getScanPackages());
+        RemoteServerHandler.initServer(fastHttpProperties.getServer());
+        RemoteServerHandler.initScanPackages(fastHttpProperties.getScanPackages());
         log.info("fasthttp调用服务已启用!");
         System.out.println(Constant.BANNER);
-        List<String> scanPackages = getScanPackagesList(lrmsHttpProperties.getScanPackages());
+        List<String> scanPackages = getScanPackagesList(fastHttpProperties.getScanPackages());
         List<Class<?>> clzz = scanPackages.stream().flatMap(s -> ReadAnnotationUtils.getClazzFromAnnotation(s, Service.class).stream()).collect(Collectors.toList());
         clzz.forEach(cls -> register(cls, beanDefinitionRegistry));
     }

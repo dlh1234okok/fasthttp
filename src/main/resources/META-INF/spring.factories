@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.mani.fasthttp.config.LrmsHttpAutoConfigure
+com.mani.fasthttp.config.FastHttpAutoConfigure

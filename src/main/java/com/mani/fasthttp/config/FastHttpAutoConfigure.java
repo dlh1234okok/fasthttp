@@ -13,11 +13,11 @@ import org.springframework.context.annotation.Configuration;
  */
 @Slf4j
 @Configuration
-@EnableConfigurationProperties(LrmsHttpProperties.class)
+@EnableConfigurationProperties(FastHttpProperties.class)
 @ConditionalOnBean({HttpServiceRegistryBeanConfigure.class})
-public class LrmsHttpAutoConfigure{
+public class FastHttpAutoConfigure {
     @Autowired
-    private LrmsHttpProperties lrmsHttpProperties;
+    private FastHttpProperties fastHttpProperties;
 
 
 }
