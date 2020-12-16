@@ -5,15 +5,17 @@ import com.mani.fasthttp.annotations.Order;
 
 /**
  * @author Dulihong
- * @since 2020-12-15
+ * @since 2020-12-16
  */
-@Order(3)
-public class BasicTypeHandlerAdaptor implements ParamTypeHandlerAdaptor {
-
+@Order(2)
+public class EnumTypeHandlerAdaptor implements ParamTypeHandlerAdaptor {
 
     @Override
     public boolean supports(Object var) {
-        return ClassUtil.isBasicType(var.getClass());
+        return ClassUtil.isEnum(var.getClass());
     }
+
+
+
 
 }

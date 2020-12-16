@@ -1,6 +1,6 @@
 package com.mani.fasthttp.handler.param;
 
-import java.util.HashMap;
+import cn.hutool.core.map.MapUtil;
 import java.util.Map;
 
 /**
@@ -12,9 +12,7 @@ public interface ParamTypeHandlerAdaptor {
     boolean supports(Object var);
 
     default Map<String, Object> handle(String name, Object value) {
-        Map<String, Object> map = new HashMap<>(2);
-        map.put(name, value);
-        return map;
+        return MapUtil.builder(name, value).build();
     }
 
 }
