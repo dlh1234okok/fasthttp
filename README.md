@@ -16,6 +16,6 @@
 
 ​    GetMapping/PostMapping/PutMapping/DeleteMapping 注解
 
-![image-20201218144119563](/Users/mani/Library/Application Support/typora-user-images/image-20201218144119563.png)
+![image-20201218144119563](https://imgchr.com/i/rJhTaj)
 
 直接注入即可调用
