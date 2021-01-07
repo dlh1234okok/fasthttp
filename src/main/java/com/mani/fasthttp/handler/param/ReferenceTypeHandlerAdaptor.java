@@ -12,7 +12,7 @@ import java.util.Map;
  * @author Dulihong
  * @since 2020-12-15
  */
-@Order(5)
+@Order(99)
 public class ReferenceTypeHandlerAdaptor implements ParamTypeHandlerAdaptor {
     @Override
     public boolean supports(Object var) {
