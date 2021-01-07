@@ -1,25 +1,22 @@
 package com.mani.fasthttp.handler.param;
 
-import cn.hutool.core.util.ClassUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+
 import com.mani.fasthttp.annotations.Order;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collection;
 
 /**
  * @author Dulihong
- * @since 2020-12-15
+ * @since 2021-01-07
  */
-@Order(5)
-public class ReferenceTypeHandlerAdaptor implements ParamTypeHandlerAdaptor {
+@Order(4)
+public class CollectionTypeHandlerAdaptor implements ParamTypeHandlerAdaptor {
     @Override
     public boolean supports(Object var) {
-        return !ClassUtil.isBasicType(var.getClass());
+        return var instanceof Collection;
     }
 
-    @Override
+    /*@Override
     public Map<String, Object> handle(String name, Object value) {
         Map<String, Object> result = new HashMap<>();
         JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(value));
@@ -28,5 +25,5 @@ public class ReferenceTypeHandlerAdaptor implements ParamTypeHandlerAdaptor {
             result.putAll(map);
         });
         return result;
-    }
+    }*/
 }
