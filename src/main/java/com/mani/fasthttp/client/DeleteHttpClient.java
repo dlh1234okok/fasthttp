@@ -34,7 +34,7 @@ public class DeleteHttpClient extends HttpClient {
                 log.error("fasthttp请求[{}]失败,请求方式[{}],状态码：[{}]", url, "DELETE", status);
                 return null;
             }
-            throw new HttpRequestException("lrms_http请求[" + url + "]失败,请求方式[DELETE],状态码：[" + status + "]");
+            throw new HttpRequestException("fast_http请求[" + url + "]失败,请求方式[DELETE],状态码：[" + status + "]");
         } catch (Exception e) {
             log.error("fasthttp请求[{}]异常,请求方式[{}],异常信息：[{}]", url, "DELETE", e.getMessage());
             if (requestBean.isAllowException()) {

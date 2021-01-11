@@ -32,16 +32,16 @@ public class PutHttpClient extends HttpClient {
                 return response.body();
             }
             if (requestBean.isAllowException()) {
-                log.error("lrms_http请求[{}]失败,请求方式[{}],状态码：[{}]", url, "PUT", status);
+                log.error("fast_http请求[{}]失败,请求方式[{}],状态码：[{}]", url, "PUT", status);
                 return null;
             }
-            throw new HttpRequestException("lrms_http请求[" + url + "]失败,请求方式[PUT],状态码：[" + status + "]");
+            throw new HttpRequestException("fast_http请求[" + url + "]失败,请求方式[PUT],状态码：[" + status + "]");
         } catch (Exception e) {
-            log.error("lrms_http请求[{}]异常,请求方式[{}],异常信息：[{}]", url, "PUT", e.getMessage());
+            log.error("fast_http请求[{}]异常,请求方式[{}],异常信息：[{}]", url, "PUT", e.getMessage());
             if (requestBean.isAllowException()) {
                 return null;
             } else {
-                throw new HttpRequestException("lrms_http请求[" + url + "]异常,请求方式[PUT],异常信息：：[" + e.getMessage() + "]");
+                throw new HttpRequestException("fast_http请求[" + url + "]异常,请求方式[PUT],异常信息：：[" + e.getMessage() + "]");
             }
         }
     }
