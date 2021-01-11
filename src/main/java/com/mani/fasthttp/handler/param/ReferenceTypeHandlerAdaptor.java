@@ -1,10 +1,11 @@
 package com.mani.fasthttp.handler.param;
 
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ClassUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import cn.hutool.core.util.ReflectUtil;
 import com.mani.fasthttp.annotations.Order;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,11 +23,33 @@ public class ReferenceTypeHandlerAdaptor implements ParamTypeHandlerAdaptor {
     @Override
     public Map<String, Object> handle(String name, Object value) {
         Map<String, Object> result = new HashMap<>();
-        JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(value));
+
+        for (Field declaredField : getBeanFields(value.getClass(), null)) {
+            Object fieldValue = ReflectUtil.getFieldValue(value, declaredField);
+            Map<String, Object> map = RequestParamAdaptor.handlerInvoke(declaredField.getName(), fieldValue);
+            result.putAll(map);
+        }
+        /*JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(value));
         jsonObject.forEach((k, v) -> {
             Map<String, Object> map = RequestParamAdaptor.handlerInvoke(k, v);
             result.putAll(map);
-        });
+        });*/
         return result;
+    }
+
+    public Field[] getBeanFields(Class<?> cls, Field[] fs) {
+
+        fs = ArrayUtil.addAll(fs, cls.getDeclaredFields());
+
+        if (cls.getSuperclass() != null) {
+
+            Class<?> clsSup = cls.getSuperclass();
+
+            fs = getBeanFields(clsSup, fs);
+
+        }
+
+        return fs;
+
     }
 }
