@@ -21,7 +21,8 @@ public class PutHttpClient extends HttpClient {
     @Override
     public String execute(String url) {
         HttpRequest request = HttpRequest.put(url);
-        requestParams(request);
+        body(request);
+        applicationJSON(request);
         authorization(request);
         HttpResponse response;
         try {
@@ -31,16 +32,16 @@ public class PutHttpClient extends HttpClient {
                 return response.body();
             }
             if (requestBean.isAllowException()) {
-                log.error("fasthttp请求[{}]失败,请求方式[{}],状态码：[{}]", url, "PUT", status);
+                log.error("lrms_http请求[{}]失败,请求方式[{}],状态码：[{}]", url, "PUT", status);
                 return null;
             }
-            throw new HttpRequestException("fasthttp请求[" + url + "]失败,请求方式[PUT],状态码：[" + status + "]");
+            throw new HttpRequestException("lrms_http请求[" + url + "]失败,请求方式[PUT],状态码：[" + status + "]");
         } catch (Exception e) {
-            log.error("fasthttp请求[{}]异常,请求方式[{}],异常信息：[{}]", url, "PUT", e.getMessage());
+            log.error("lrms_http请求[{}]异常,请求方式[{}],异常信息：[{}]", url, "PUT", e.getMessage());
             if (requestBean.isAllowException()) {
                 return null;
             } else {
-                throw new HttpRequestException("fasthttp请求[" + url + "]异常,请求方式[PUT],异常信息：：[" + e.getMessage() + "]");
+                throw new HttpRequestException("lrms_http请求[" + url + "]异常,请求方式[PUT],异常信息：：[" + e.getMessage() + "]");
             }
         }
     }

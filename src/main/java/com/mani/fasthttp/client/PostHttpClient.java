@@ -3,7 +3,7 @@ package com.mani.fasthttp.client;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpStatus;
-import com.mani.fasthttp.ext.HttpRequestException;
+import com.skzz.lrms_http.ext.HttpRequestException;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -21,7 +21,8 @@ public class PostHttpClient extends HttpClient {
     @Override
     public String execute(String url) {
         HttpRequest request = HttpRequest.post(url);
-        requestParams(request);
+        body(request);
+        applicationJSON(request);
         authorization(request);
         HttpResponse response;
         try {
@@ -31,16 +32,16 @@ public class PostHttpClient extends HttpClient {
                 return response.body();
             }
             if (requestBean.isAllowException()) {
-                log.error("fasthttp请求[{}]失败,请求方式[{}],状态码：[{}]", url, "POST", status);
+                log.error("lrms_http请求[{}]失败,请求方式[{}],状态码：[{}]", url, "POST", status);
                 return null;
             }
-            throw new HttpRequestException("fasthttp请求[" + url + "]失败,请求方式[POST],状态码：[" + status + "]");
+            throw new HttpRequestException("lrms_http请求[" + url + "]失败,请求方式[POST],状态码：[" + status + "]");
         } catch (Exception e) {
-            log.error("fasthttp请求[{}]异常,请求方式[{}],异常信息：[{}]", url, "POST", e.getMessage());
+            log.error("lrms_http请求[{}]异常,请求方式[{}],异常信息：[{}]", url, "POST", e.getMessage());
             if (requestBean.isAllowException()) {
                 return null;
             } else {
-                throw new HttpRequestException("fasthttp请求[" + url + "]异常,请求方式[POST],异常信息：：[" + e.getMessage() + "]");
+                throw new HttpRequestException("lrms_http请求[" + url + "]异常,请求方式[POST],异常信息：：[" + e.getMessage() + "]");
             }
         }
     }

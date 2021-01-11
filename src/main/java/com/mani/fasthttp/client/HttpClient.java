@@ -1,6 +1,8 @@
 package com.mani.fasthttp.client;
 
 import cn.hutool.http.HttpRequest;
+import com.alibaba.fastjson.JSON;
+
 
 /**
  * @author Dulihong
@@ -21,6 +23,16 @@ public abstract class HttpClient {
         if (null != requestBean.getRequestParams()) {
             request.form(requestBean.getRequestParams());
         }
+    }
+
+    protected void body(HttpRequest request) {
+        if (null != requestBean.getRequestParams()) {
+            request.body(JSON.toJSONString(requestBean.getRequestParams()), "application/json;charset=utf-8");
+        }
+    }
+
+    protected void applicationJSON(HttpRequest request) {
+        request.contentType("application/json;charset=utf-8");
     }
 
     protected void authorization(HttpRequest request) {
