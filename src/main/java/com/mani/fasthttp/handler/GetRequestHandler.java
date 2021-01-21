@@ -1,9 +1,10 @@
 package com.mani.fasthttp.handler;
 
-import com.skzz.lrms_http.annotations.GetMapping;
-import com.skzz.lrms_http.client.GetHttpClient;
-import com.skzz.lrms_http.client.HttpClient;
-import com.skzz.lrms_http.client.RequestBean;
+
+import com.mani.fasthttp.annotations.GetMapping;
+import com.mani.fasthttp.client.GetHttpClient;
+import com.mani.fasthttp.client.HttpClient;
+import com.mani.fasthttp.client.RequestBean;
 
 import java.lang.annotation.Annotation;
 

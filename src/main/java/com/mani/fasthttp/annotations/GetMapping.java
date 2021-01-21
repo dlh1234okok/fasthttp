@@ -22,4 +22,6 @@ public @interface GetMapping {
     boolean readAsync() default false;
 
     String formatData() default "";
+
+    Class<?> generic() default Void.class;
 }

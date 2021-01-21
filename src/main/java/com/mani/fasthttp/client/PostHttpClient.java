@@ -3,7 +3,7 @@ package com.mani.fasthttp.client;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpStatus;
-import com.skzz.fast_http.ext.HttpRequestException;
+import com.mani.fasthttp.ext.HttpRequestException;
 import lombok.extern.slf4j.Slf4j;
 
 /**
