@@ -26,14 +26,9 @@ public class ReferenceTypeHandlerAdaptor implements ParamTypeHandlerAdaptor {
 
         for (Field declaredField : getBeanFields(value.getClass(), null)) {
             Object fieldValue = ReflectUtil.getFieldValue(value, declaredField);
-            Map<String, Object> map = RequestParamAdaptor.handlerInvoke(declaredField.getName(), fieldValue);
-            result.putAll(map);
+            // Map<String, Object> map = RequestParamAdaptor.handlerInvoke(declaredField.getName(), fieldValue);
+            result.put(declaredField.getName(), fieldValue);
         }
-        /*JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(value));
-        jsonObject.forEach((k, v) -> {
-            Map<String, Object> map = RequestParamAdaptor.handlerInvoke(k, v);
-            result.putAll(map);
-        });*/
         return result;
     }
 

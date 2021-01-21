@@ -15,9 +15,12 @@ public abstract class ResultTypeAdaptor {
     protected Class<?> returnType;
     protected boolean allowException;
 
+    protected Class<?> generic;
+
+
     public Object typeConversion() {
         try {
-            return JSON.parseObject(resultJson, returnType);
+            return finalResult(resultJson);
         } catch (Exception e) {
             if (allowException) {
                 log.error("Get Result Error,ResultType：[{}]", returnType.getName());
@@ -26,6 +29,17 @@ public abstract class ResultTypeAdaptor {
             throw new ResultTypeException("Get Result Error,ResultType：[" + returnType.getName() + "]");
         }
     }
+
+
+    protected Object finalResult(String json) {
+        CollectionResultTypeAdaptor collectionResultTypeAdaptor = new CollectionResultTypeAdaptor();
+        Object result = JSON.parseObject(json, returnType);
+        if (collectionResultTypeAdaptor.isCollection(result)) {
+            result = collectionResultTypeAdaptor.toCollection(result, generic);
+        }
+        return result;
+    }
+
 
     public void setResultJson(String resultJson) {
         this.resultJson = resultJson;
@@ -37,5 +51,9 @@ public abstract class ResultTypeAdaptor {
 
     public void setAllowException(boolean allowException) {
         this.allowException = allowException;
+    }
+
+    public void setGeneric(Class<?> generic) {
+        this.generic = generic;
     }
 }

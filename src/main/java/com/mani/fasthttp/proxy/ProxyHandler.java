@@ -32,7 +32,7 @@ public class ProxyHandler implements InvocationHandler {
         Annotation[] annotations = method.getAnnotations();
         HttpRequestHandler httpRequestHandler = null;
         Class<HttpRequestHandler> requestHandlerClass = HttpRequestHandler.class;
-        Set<Class<?>> classes = ClassUtil.scanPackageBySuper(requestHandlerClass.getPackage().getName(), HttpRequestHandler.class);
+        Set<Class<?>> classes = ClassUtil.scanPackageBySuper(requestHandlerClass.getPackage().getName(), requestHandlerClass);
         for (Annotation annotation : annotations) {
             httpRequestHandler = httpRequestHandlerBuild(classes, annotation);
         }
@@ -43,7 +43,7 @@ public class ProxyHandler implements InvocationHandler {
             httpRequestHandler.initRequest(method.getParameters(), args);
             String result = httpRequestHandler.execute();
             if (StringUtils.isEmpty(result)) {
-                log.error("fasthttp,Result is Empty,Url:[{}]", httpRequestHandler.getUrl());
+                log.error("lrms_http,Result is Empty,Url:[{}]", httpRequestHandler.getUrl());
                 return null;
             }
             Class<?> returnType = method.getReturnType();
@@ -57,6 +57,7 @@ public class ProxyHandler implements InvocationHandler {
         ResultTypeAdaptor resultTypeAdaptor = ResultTypeFactory.getResultTypeAdaptor(httpRequestHandler.getFormatData());
         resultTypeAdaptor.setResultJson(result);
         resultTypeAdaptor.setReturnType(returnType);
+        resultTypeAdaptor.setGeneric(httpRequestHandler.getGeneric());
         resultTypeAdaptor.setAllowException(httpRequestHandler.isAllowException());
         return resultTypeAdaptor;
     }

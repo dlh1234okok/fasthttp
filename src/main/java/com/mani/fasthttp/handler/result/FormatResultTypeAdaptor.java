@@ -2,7 +2,7 @@ package com.mani.fasthttp.handler.result;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.mani.fasthttp.ext.ResultTypeException;
+import com.skzz.lrms_http.ext.ResultTypeException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
@@ -33,10 +33,13 @@ public class FormatResultTypeAdaptor extends ResultTypeAdaptor {
                 result = o;
                 if (iterator.hasNext()) {
                     init = JSON.parseObject(JSON.toJSONString(o));
+                } else {
+                    result = finalResult(JSON.toJSONString(o));
                 }
             }
             return result;
         } catch (Exception e) {
+            e.printStackTrace();
             if (allowException) {
                 log.error("Format Data ERROR，Rules：[{}]", String.join(",", rules), e);
                 return null;

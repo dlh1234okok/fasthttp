@@ -25,6 +25,8 @@ public abstract class HttpRequestHandler {
     protected boolean readAsync;
     protected String formatData;
 
+    protected Class<?> generic;
+
     protected Map<String, Object> params;
 
     public HttpRequestHandler() {
@@ -91,5 +93,13 @@ public abstract class HttpRequestHandler {
 
     public String getUrl() {
         return url;
+    }
+
+    public Class<?> getGeneric() {
+        return generic;
+    }
+
+    public void setGeneric(Class<?> generic) {
+        this.generic = generic;
     }
 }
