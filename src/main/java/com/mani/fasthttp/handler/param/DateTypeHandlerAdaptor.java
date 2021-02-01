@@ -10,7 +10,7 @@ import java.util.Date;
  * @since 2021-01-07
  */
 @Order(5)
-public class DateTypeHandlerAdaptor implements ParamTypeHandlerAdaptor {
+public class DateTypeHandlerAdaptor extends AbstractParamHandlerAdaptor {
 
     @Override
     public boolean supports(Object var) {

@@ -14,7 +14,7 @@ import java.util.Map;
  * @since 2020-12-15
  */
 @Order(99)
-public class ReferenceTypeHandlerAdaptor implements ParamTypeHandlerAdaptor {
+public class ReferenceTypeHandlerAdaptor extends AbstractParamHandlerAdaptor {
     @Override
     public boolean supports(Object var) {
         return !ClassUtil.isBasicType(var.getClass());

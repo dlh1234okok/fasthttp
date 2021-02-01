@@ -47,7 +47,7 @@ public class RequestParamAdaptor {
             }
             if (!isRest) {
                 // params.put(parameter.getName(), args[i]);
-                Optional.ofNullable(handlerInvoke(parameter.getName(), args[i])).ifPresent(params::putAll);
+                Optional.ofNullable(AbstractParamHandlerAdaptor.getHandlerAdaptorChain().process(parameter.getName(), args[i])).ifPresent(params::putAll);
             }
         }
         this.url = url;
@@ -64,7 +64,8 @@ public class RequestParamAdaptor {
     }
 
 
-    static List<Class<?>> getHandlerClasses(String name, Object value) {
+    @Deprecated
+    List<Class<?>> getHandlerClasses(String name, Object value) {
         Class<ParamTypeHandlerAdaptor> paramTypeHandlerAdaptorClass = ParamTypeHandlerAdaptor.class;
         Set<Class<?>> classes = ClassUtil.scanPackageBySuper(paramTypeHandlerAdaptorClass.getPackage().getName(), paramTypeHandlerAdaptorClass);
         return classes.stream().sorted(Comparator.comparing(s -> {
@@ -73,7 +74,8 @@ public class RequestParamAdaptor {
         })).collect(Collectors.toList());
     }
 
-    static Map<String, Object> handlerInvoke(String name, Object value) {
+    @Deprecated
+    Map<String, Object> handlerInvoke(String name, Object value) {
         List<Class<?>> handlerClasses = getHandlerClasses(name, value);
         Map<String, Object> result = null;
         for (Class<?> cls : handlerClasses) {

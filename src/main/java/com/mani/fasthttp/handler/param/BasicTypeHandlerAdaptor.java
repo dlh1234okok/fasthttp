@@ -8,7 +8,7 @@ import com.mani.fasthttp.annotations.Order;
  * @since 2020-12-15
  */
 @Order(3)
-public class BasicTypeHandlerAdaptor implements ParamTypeHandlerAdaptor {
+public class BasicTypeHandlerAdaptor extends AbstractParamHandlerAdaptor {
 
 
     @Override

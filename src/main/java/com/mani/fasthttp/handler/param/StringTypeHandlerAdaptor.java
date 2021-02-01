@@ -8,7 +8,7 @@ import com.mani.fasthttp.annotations.Order;
  * @since 2020-12-15
  */
 @Order(1)
-public class StringTypeHandlerAdaptor implements ParamTypeHandlerAdaptor {
+public class StringTypeHandlerAdaptor extends AbstractParamHandlerAdaptor {
 
     @Override
     public boolean supports(Object var) {
