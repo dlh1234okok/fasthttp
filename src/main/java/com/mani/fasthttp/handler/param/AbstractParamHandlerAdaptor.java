@@ -18,12 +18,12 @@ public abstract class AbstractParamHandlerAdaptor implements ParamTypeHandlerAda
         if (null == handlerAdaptor) {
             handlerAdaptor = new NullParamHandlerAdaptor();
             handlerAdaptor
-                    .setNextHandlerAdaptor(new StringTypeHandlerAdaptor())
-                    .setNextHandlerAdaptor(new EnumTypeHandlerAdaptor())
-                    .setNextHandlerAdaptor(new BasicTypeHandlerAdaptor())
-                    .setNextHandlerAdaptor(new CollectionTypeHandlerAdaptor())
-                    .setNextHandlerAdaptor(new DateTypeHandlerAdaptor())
-                    .setNextHandlerAdaptor(new ReferenceTypeHandlerAdaptor());
+                    .addNextHandlerAdaptor(new StringTypeHandlerAdaptor())
+                    .addNextHandlerAdaptor(new EnumTypeHandlerAdaptor())
+                    .addNextHandlerAdaptor(new BasicTypeHandlerAdaptor())
+                    .addNextHandlerAdaptor(new CollectionTypeHandlerAdaptor())
+                    .addNextHandlerAdaptor(new DateTypeHandlerAdaptor())
+                    .addNextHandlerAdaptor(new ReferenceTypeHandlerAdaptor());
         }
         return handlerAdaptor;
     }
@@ -45,7 +45,7 @@ public abstract class AbstractParamHandlerAdaptor implements ParamTypeHandlerAda
         return null;
     }
 
-    public AbstractParamHandlerAdaptor setNextHandlerAdaptor(AbstractParamHandlerAdaptor nextHandlerAdaptor) {
+    public AbstractParamHandlerAdaptor addNextHandlerAdaptor(AbstractParamHandlerAdaptor nextHandlerAdaptor) {
         this.nextHandlerAdaptor = nextHandlerAdaptor;
         return nextHandlerAdaptor;
     }
