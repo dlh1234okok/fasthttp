@@ -2,6 +2,7 @@ package com.mani.fasthttp.handler.param;
 
 import cn.hutool.core.map.MapUtil;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
@@ -36,13 +37,14 @@ public abstract class AbstractParamHandlerAdaptor implements ParamTypeHandlerAda
 
 
     public Map<String, Object> process(String name, Object value) {
-        if (supports(value)) {
-            return handle(name, value);
-        }
-        if (null == nextHandlerAdaptor) {
-            return null;
-        }
-        return Optional.of(nextHandlerAdaptor).map(s -> handle(name, value)).orElse(null);
+        AbstractParamHandlerAdaptor handlerAdaptor = this;
+        do {
+            if (handlerAdaptor.supports(value)) {
+                return handlerAdaptor.handle(name, value);
+            }
+            handlerAdaptor = handlerAdaptor.nextHandlerAdaptor;
+        } while (handlerAdaptor != null);
+        return null;
     }
 
     public AbstractParamHandlerAdaptor setNextHandlerAdaptor(AbstractParamHandlerAdaptor nextHandlerAdaptor) {
