@@ -4,7 +4,6 @@ import com.mani.fasthttp.annotations.Service;
 import com.mani.fasthttp.config.FastHttpProperties;
 import com.mani.fasthttp.constant.Constant;
 import com.mani.fasthttp.handler.ReadAnnotationUtils;
-import com.mani.fasthttp.handler.RemoteServerHandler;
 import com.mani.fasthttp.proxy.ProxyFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
@@ -20,7 +19,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +28,7 @@ import java.util.stream.Collectors;
  * @author Dulihong
  * @since 2020-12-09
  */
-@Component
+@Deprecated
 @Slf4j
 public class HttpServiceRegistryBeanConfigure implements ApplicationContextAware, BeanDefinitionRegistryPostProcessor, EnvironmentAware {
 

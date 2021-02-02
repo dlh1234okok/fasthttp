@@ -1,4 +1,4 @@
-package com.mani.fasthttp.handler;
+package com.mani.fasthttp;
 
 import com.mani.fasthttp.ext.RemoteServerException;
 import lombok.extern.slf4j.Slf4j;

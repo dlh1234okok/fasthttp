@@ -16,7 +16,7 @@ import java.util.Map;
 public class FastHttpProperties {
 
     private Map<String, String> server;
-
+    @Deprecated
     private String scanPackages;
 
     private String authorization;

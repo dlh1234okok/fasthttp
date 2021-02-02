@@ -1,6 +1,6 @@
 package com.mani.fasthttp.config;
 
-import com.mani.fasthttp.HttpServiceRegistryBeanConfigure;
+import com.mani.fasthttp.HttpServiceRegister;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @Configuration
 @EnableConfigurationProperties(FastHttpProperties.class)
-@ConditionalOnBean({HttpServiceRegistryBeanConfigure.class})
+@ConditionalOnBean({HttpServiceRegister.class})
 public class FastHttpAutoConfigure {
     @Autowired
     private FastHttpProperties fastHttpProperties;
